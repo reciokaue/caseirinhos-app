@@ -20,9 +20,13 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "caseirinhos.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyBSVOE5qPy-HhagaAM19CwjPH3iKWfbPo4" }   
       }
     },
     "web": {
