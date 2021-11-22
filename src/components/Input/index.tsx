@@ -5,14 +5,14 @@ import { styles } from './styles';
 import { useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons'; 
 import { RectButton } from 'react-native-gesture-handler';
-import { Jost_100Thin } from '@expo-google-fonts/jost';
 
 interface InputProps extends TextInputProps{
   placeholder: string
   stateText: string
   setText: Function
+  required?: boolean
 }
-function Input({placeholder, setText, stateText,  ...rest}: InputProps) {
+function Input({placeholder, setText, stateText, required,  ...rest}: InputProps) {
   const labelAnim = useRef(new Animated.ValueXY()).current;
   const textSizeAnim = useRef(new Animated.Value(16)).current;
   const removeAnin = useRef(new Animated.Value(0)).current;
@@ -63,26 +63,21 @@ function Input({placeholder, setText, stateText,  ...rest}: InputProps) {
       }),
     ]).start();
   };
-
+  
   return (
     <View style={styles.container}>
-      {/* <View style={{
-        position: 'absolute',
-        width: 10,
-        height: '100%',
-        backgroundColor: '#fd0'
-      }}/> */}
+      {required && <Text style={styles.required}>*</Text>}
       <TextInput
         value={stateText}
         style={styles.input}
         onChangeText={text => setText(text)}
         {...rest}
-      />
+        />
       <Animated.View
         style={[styles.placeholder,{
           transform: labelAnim.getTranslateTransform(),
         }]}
-      >
+        >
        <Animated.Text style={[styles.text, {fontSize: textSizeAnim}]}>
          {placeholder}
         </Animated.Text>

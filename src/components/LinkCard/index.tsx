@@ -9,23 +9,27 @@ import { useNavigation } from '@react-navigation/native';
 
 interface LinkCardProps extends RectButtonProps{
   title: string
-  subtitle: string
-  toLink?: string
+  subtitle?: string
+  toLink: string
 }
 
-function LinkCard({title, subtitle, ...rest}: LinkCardProps) {
+function LinkCard({title, subtitle = '', toLink, ...rest}: LinkCardProps) {
   const navigation = useNavigation();
 
+  function navigate(){
+    navigation.navigate(toLink)
+  }
+
   return(
-    <RectButton onPress={() => navigation.navigate('DateSetting')} {...rest} style={styles.container}>
-        <View style={styles.image}></View>
-        <View style={styles.info}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.subtitle}>{subtitle}</Text>
-        </View>
-        <View style={styles.icon}>
+    <RectButton onPress={navigate} {...rest} style={styles.container}>
+      <View style={styles.image}></View>
+      <View style={styles.info}>
+        <Text style={styles.title}>{title}</Text>
+        {subtitle != '' && <Text style={styles.subtitle}>{subtitle}</Text>}
+      </View>
+      <View style={styles.icon}>
         <Entypo name="chevron-small-down" size={35} color="#E83F5B" />
-        </View>
+      </View>
     </RectButton>
   )
 };

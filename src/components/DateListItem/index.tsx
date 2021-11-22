@@ -8,18 +8,14 @@ import { styles } from './styles';
 
 interface DateListItemProps extends RectButtonProps{
   hour: string
-  price: number
   selected?: boolean
 }
 
-function DateListItem({price, hour, selected, ...rest}: DateListItemProps) {
+function DateListItem({hour, selected, ...rest}: DateListItemProps) {
   return(
     <RectButton {...rest} style={styles.container}>
-        <Text style={styles.hour}>{hour}</Text>
-        <View style={styles.rightSide}>
-          <Text style={styles.price}>R${price}</Text>
-          <View style={[styles.radio, selected&& styles.selected]}/>
-        </View>
+      <Text style={styles.hour}>{hour}</Text>
+      <View style={[styles.radio, selected&& styles.selected]}/>
     </RectButton>
   )
 };

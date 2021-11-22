@@ -13,11 +13,13 @@ export const styles = StyleSheet.create({
     width: '100%',
     flex: 1,
     borderRadius: 20,
+    // height: 50,
   },
   addButtonContainer: {
     borderBottomRightRadius: 20,
     borderTopRightRadius: 20,
-    height: 190,
+    // height: 190 + 50,
+    height: '100%',
     width: 80,
     left: 16,
     overflow: "hidden",
@@ -31,7 +33,6 @@ export const styles = StyleSheet.create({
   },
   image: {
     backgroundColor: '#C4C4C4',
-    // height: 95,
     height: 190,
     width: '100%',
     borderTopLeftRadius: 20,

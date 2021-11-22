@@ -58,5 +58,10 @@ export const styles = StyleSheet.create({
     width: "100%",
     paddingTop: 16,
     paddingHorizontal: 32,
+  },
+  progress: {
+    width: '50%',
+    height: 10,
+    backgroundColor: theme.colors.gold,
   }
 });

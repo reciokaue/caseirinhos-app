@@ -10,25 +10,14 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // backgroundColor: '#fd0'
   },
   selected:{
     borderColor: '#E83F5B8C',
     borderWidth: 6,
   },
-  rightSide:{
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
   hour: {
     fontSize: 14,
     color: theme.colors.text,
-  },
-  price: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#4D4D4D',
   },
   radio:{
     width: 25,

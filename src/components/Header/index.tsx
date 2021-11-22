@@ -1,14 +1,28 @@
 import React from 'react';
 
-import { Fontisto } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
 import { styles } from './styles';
+import { Feather } from '@expo/vector-icons';
+import { theme } from '../../theme';
+import { RectButton } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/core';
 
-function Header() {
+interface HeaderProps {
+  title?: string
+  border?: boolean
+}
+
+function Header({title, border = false}: HeaderProps) {
+  const navigation = useNavigation()
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Caseirinhos</Text>
-      <Fontisto name="coffeescript" size={24} color="black" />
+    <View style={[styles.container, border && styles.border]}>
+      <View style={styles.buttonWrapper}>
+        <RectButton onPress={() => navigation.goBack()} style={styles.button}>
+          <Feather name="chevron-left" size={32} color={theme.colors.text} />
+        </RectButton>
+      </View>
+      {title && <Text style={styles.title}>{title}</Text>}
     </View>
   );
 };

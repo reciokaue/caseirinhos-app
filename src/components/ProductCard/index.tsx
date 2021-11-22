@@ -8,6 +8,8 @@ import { styles } from './styles';
 import UseOrder from '../../hooks/useOrder';
 import { useNavigation } from '@react-navigation/native';
 
+import { showMessage } from "react-native-flash-message";
+
 interface ProductCardProps extends RectButtonProps{
   itemId: string
   title: string
@@ -21,10 +23,15 @@ function ProductCard({itemId, title, about, price, amount, imageUrls, ...rest}: 
   const navigation = useNavigation()
   const { addItemToOrder } = UseOrder()
   
+  function HandleAddItem(){
+    addItemToOrder(itemId, title, about, price, amount, imageUrls)
+    showMessage({message: `${amount}+ ${title} foi adicionado a sua cestinha`, type: 'success'})
+  }
+
   function RightSide(){
     return(
       <View style={styles.addButtonContainer}> 
-        <RectButton onPress={() => addItemToOrder(itemId, title, about, price, amount, imageUrls)} style={styles.addButton}>
+        <RectButton onPress={HandleAddItem} style={styles.addButton}>
           <MaterialIcons name="exposure-plus-1" size={32} color="#FFF" />
         </RectButton>
       </View>

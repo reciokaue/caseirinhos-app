@@ -5,6 +5,13 @@ type OrderContextType = {
   addItemToOrder: (itemId: string, title: string, about: string, price: string, amount: number, imageUrls: Array<String>,) => void 
   removeItemToOrder: (id: string, price: string) => void 
   subTotal: number
+  setPaymentMethod: (paymentMethod: PaymentProps) => void
+  setDeliveryDate: (deliveryDate: string) => void
+  setDeliveryLocation: ({street, homeNumber, complement, referencePoint, residenceType, longitude, latitude}: DeliveryLocation ) => void
+  paymentMethod: {payment: string, method: string}
+  deliveryDate: string
+  deliveryLocation: DeliveryLocation
+  HandleClearOrder: () => void 
 }
 type orderItemType = {
   itemId: string
@@ -14,15 +21,33 @@ type orderItemType = {
   amount: number
   imageUrls: Array<String>
 }
+interface DeliveryLocation{
+  street: string
+  homeNumber: string
+  complement?: string
+  referencePoint?: string
+  residenceType: string
+  longitude: number | string
+  latitude: number | string
+}
 interface OrderProviderProps{
   children: ReactNode
 }
+interface PaymentProps{
+  payment: string
+  method: string
+}
+
 
 export const OrderContext = createContext({} as OrderContextType)
 
 export function OrderProvider({children} : OrderProviderProps){
   const [ orderItens, setOrderItens ] = useState<orderItemType[]>([])
   const [ subTotal, setSubTotal ] = useState<number>(0)
+
+  const [ paymentMethod, setPaymentMethod ] = useState<PaymentProps>()
+  const [ deliveryDate, setDeliveryDate ] = useState('')
+  const [ deliveryLocation, setDeliveryLocation ] = useState<DeliveryLocation>()
 
   function addItemToOrder(
     itemId: string,
@@ -68,13 +93,23 @@ export function OrderProvider({children} : OrderProviderProps){
       }
     }
   }
+  function HandleClearOrder(){
+    setOrderItens([])
+  }
     
   return (
     <OrderContext.Provider value={{
       orderItens,
       addItemToOrder,
       removeItemToOrder,
-      subTotal
+      subTotal,
+      setPaymentMethod,
+      setDeliveryDate,
+      setDeliveryLocation,
+      paymentMethod,
+      deliveryDate,
+      deliveryLocation,
+      HandleClearOrder,
     }}>
       {children}
     </OrderContext.Provider>

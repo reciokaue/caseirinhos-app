@@ -4,7 +4,6 @@ import { theme } from "../../theme";
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    // height: 50,
     position: "relative",
     flexDirection: "row",
     borderWidth: 1.5,
@@ -23,7 +22,6 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.dmRegular,
     backgroundColor: '#0000',
     fontSize: 16,
-    // backgroundColor: '#0df',
     zIndex: 2,
   },
   placeholder: {
@@ -53,5 +51,14 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 100,
     zIndex: 3,
+  },
+  required: {
+    position: "absolute",
+    right: 0,
+    top: -5,
+    color: theme.colors.red,
+    fontSize: 22,
+    fontFamily: theme.fonts.poppins,
+    zIndex: 10,
   }
 });

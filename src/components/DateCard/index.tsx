@@ -8,7 +8,7 @@ import { styles } from './styles';
 
 interface DateCardProps extends RectButtonProps{
   title: string
-  day: number
+  day: number | string
   selected?: boolean
 }
 
@@ -16,8 +16,8 @@ function DateCard({title, day, selected, ...rest}: DateCardProps) {
   return(
     <View  style={[styles.wrapper, selected&& styles.selected]}>
       <RectButton {...rest} style={styles.container}>
-          <Text style={styles.title}>{day}</Text>
-          <Text style={styles.subtitle}>{title}</Text>
+        <Text style={styles.title}>{day}</Text>
+        {title !== '' && <Text style={styles.subtitle}>{title}</Text>}
       </RectButton>
     </View>
   )

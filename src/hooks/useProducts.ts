@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { database } from '../services/firebase'
 import { LogBox } from 'react-native';
 
-type ProductType = {
+export type ProductType = {
   id: string
   title: string
   about: string

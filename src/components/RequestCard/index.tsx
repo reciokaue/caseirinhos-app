@@ -7,35 +7,72 @@ import { Feather } from '@expo/vector-icons';
 import { styles } from './styles';
 import UseOrder from '../../hooks/useOrder';
 import { useNavigation } from '@react-navigation/native';
+import { ProductType } from '../../hooks/useProducts';
+import { format, parseJSON } from 'date-fns';
 
 interface RequestCardProps extends RectButtonProperties{
-
+  requestInfo: RequestType
+}
+interface RequestType{
+  id: string
+  author: string
+  deliveryPlace: {
+    complement: string
+    homeNumber: string
+    latitude: string
+    longitude: string
+    referencePoint: string
+    residenceType: string
+    street: string
+  }
+  paymenthMethod: {
+    method: string
+    paymenth: string
+  }
+  items: Array<ProductType>
+  total: string
+  deliveryDate: string
+  whenDone: string
 }
 
-function RequestCard({ ...rest} :RequestCardProps) {
+function RequestCard({
+  id,
+  author,
+  deliveryPlace,
+  paymenthMethod,
+  items,
+  total,
+  deliveryDate,
+  whenDone,
+} :RequestType) {
   const navigation = useNavigation()
   const { addItemToOrder } = UseOrder()
 
   return (
     <RectButton
-      // onPress={() => navigation.navigate({
-        // name: 'ProductDetail',
-        // params: {
-        //   itemId: itemId,
-        //   imageUrl: imageUrl,
-        //   title: title,
-        //   price: price,
-      //   }
-      // })}
-      {...rest}  style={styles.container}
+      onPress={() =>
+        navigation.navigate({
+        name: 'ProductDetail',
+        params: {
+          id,
+          author,
+          deliveryPlace,
+          paymenthMethod,
+          items,
+          total,
+          deliveryDate,
+          whenDone,
+        }
+      })}
+      style={styles.container}
     > 
       <View>
         <View style={styles.row}>
           <Text style={styles.title}>Festa Mariana</Text>
-          <Text style={styles.title}>25/06</Text>
+          <Text style={styles.title}>{`${format(parseJSON(deliveryDate), 'kk')}:${format(parseJSON(deliveryDate), 'mm')}`}</Text>
         </View>
         <View style={styles.row}>
-          <Text style={styles.subtitle}>13:00 - 14:00</Text>
+          <Text style={styles.subtitle}>{`${format(parseJSON(deliveryDate), 'dd')}:00`}</Text>
         </View>
       </View>
       <View>

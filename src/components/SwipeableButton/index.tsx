@@ -8,6 +8,7 @@ import { Feather } from '@expo/vector-icons';
 import { styles } from './styles';
 import UseOrder from '../../hooks/useOrder';
 import { useNavigation } from '@react-navigation/native';
+import { showMessage } from 'react-native-flash-message';
 
 interface SwipeableProps extends RectButtonProperties{
   itemId: string
@@ -22,11 +23,20 @@ function SwipeableButton({itemId, title, about, price, amount, imageUrls, ...res
   const navigation = useNavigation()
   
   const { addItemToOrder, removeItemToOrder } = UseOrder()
+
+  function HandleAddItem(){
+    addItemToOrder(itemId, title, about, price, 1, imageUrls)
+    showMessage({message: `1+ ${title} foi adicionado a sua cestinha`, type: 'success'})
+  }
+  function HandleRemoveItem(){
+    removeItemToOrder(itemId, price)
+    showMessage({message: `1- ${title} foi removido`, type: 'danger', })
+  }
   
   function LeftSide(){
     return(
       <View style={styles.removeButtonContainer}> 
-        <RectButton onPress={() => removeItemToOrder(itemId, price)} style={styles.removeButton}>
+        <RectButton onPress={HandleRemoveItem} style={styles.removeButton}>
           <Feather name="trash" size={32} color="#FFF"/>
         </RectButton>
       </View>
@@ -35,7 +45,7 @@ function SwipeableButton({itemId, title, about, price, amount, imageUrls, ...res
   function RightSide(){
     return(
       <View style={styles.addButtonContainer}> 
-        <RectButton onPress={() => addItemToOrder(itemId, title, about, price, 1, imageUrls)} style={styles.addButton}>
+        <RectButton onPress={HandleAddItem} style={styles.addButton}>
           <MaterialIcons name="exposure-plus-1" size={32} color="#FFF" />
         </RectButton>
       </View>
