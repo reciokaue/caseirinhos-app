@@ -1,3 +1,4 @@
+import { useRoute } from '@react-navigation/core';
 import React, { useState } from 'react';
 
 import { Text, View } from 'react-native';
@@ -30,9 +31,17 @@ interface RequestType{
   deliveryDate: string
   whenDone: string
 }
+interface Params{
+  request: RequestType
+}
 
 function RequestDetail() {
   const [ showAlert, setShowAlert ] = useState(false)
+
+  const route = useRoute()
+  const { 
+    request
+  } = route.params as Params
 
   return (<>
     <Header title="Detalhe do pedido" border/>
@@ -46,15 +55,9 @@ function RequestDetail() {
           </View>
         </View>
         <View style={styles.listItems}>
-          <Bullet/>
-          <Bullet/>
-          <Bullet/>
-          <Bullet/>
-          <Bullet/>
-          <Bullet/>
-          <Bullet/>
-          <Bullet/>
-          <Bullet/>
+          {request.items.map((item) => {
+            <Bullet amount={item.amount}/>
+          })}
         </View>
       </View>
       <View style={styles.container}>
@@ -94,14 +97,15 @@ function RequestDetail() {
     </>
   );
 };
-const Bullet = () => (
+function Bullet(amount: number){
+  return(
   <View style={styles.bulletWrapper}>
     <RectButton style={{justifyContent: "center", alignItems: "center", padding: 8}}>
-      <Text style={styles.bulletTitle}>12x</Text>
+      <Text style={styles.bulletTitle}>{amount}2x</Text>
       <View style={styles.bulletImage}>
       </View>
     </RectButton>
   </View>
-)
+)}
 
 export default RequestDetail;

@@ -7,6 +7,7 @@ export type ProductType = {
   title: string
   about: string
   price: string
+  amount: number 
   img:{
     url: Array<String>
     reference: Array<String>

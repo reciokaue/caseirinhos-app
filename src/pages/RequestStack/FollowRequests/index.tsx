@@ -8,9 +8,7 @@ import { styles } from './styles';
 import cake from '../../../assets/cake.jpg'
 
 function FollowRequests() {
-  // const { userId } = UseAuthFirebase()
   const { request } = useRequests()
-  // console.log(request)
 
   return (
     <ScrollView  contentContainerStyle={styles.container}>
@@ -20,16 +18,17 @@ function FollowRequests() {
       {request[0]?
         request.map((item) => (
           <RequestCard
-          key={item.id}
-          id={item.id}
-          author={item.author}
-          deliveryPlace={item.deliveryPlace}
-          paymenthMethod={item.paymenthMethod}
-            items={item.items}
-            total={item.total}
-            deliveryDate={item.deliveryDate}
-            whenDone={item.whenDone}
-            />
+            request={item}
+            // key={item.id}
+            // id={item.id}
+            // author={item.author}
+            // deliveryPlace={item.deliveryPlace}
+            // paymenthMethod={item.paymenthMethod}
+            // items={item.items}
+            // total={item.total}
+            // deliveryDate={item.deliveryDate}
+            // whenDone={item.whenDone}
+          />
         )):
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <Text style={styles.subtitle}>Sem pedidos por enquanto</Text>

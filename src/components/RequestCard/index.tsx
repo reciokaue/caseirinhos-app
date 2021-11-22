@@ -11,9 +11,9 @@ import { ProductType } from '../../hooks/useProducts';
 import { format, parseJSON } from 'date-fns';
 
 interface RequestCardProps extends RectButtonProperties{
-  requestInfo: RequestType
+  request: RequestProps
 }
-interface RequestType{
+interface RequestProps{
   id: string
   author: string
   deliveryPlace: {
@@ -35,16 +35,7 @@ interface RequestType{
   whenDone: string
 }
 
-function RequestCard({
-  id,
-  author,
-  deliveryPlace,
-  paymenthMethod,
-  items,
-  total,
-  deliveryDate,
-  whenDone,
-} :RequestType) {
+function RequestCard({request} :RequestCardProps) {
   const navigation = useNavigation()
   const { addItemToOrder } = UseOrder()
 
@@ -54,14 +45,7 @@ function RequestCard({
         navigation.navigate({
         name: 'ProductDetail',
         params: {
-          id,
-          author,
-          deliveryPlace,
-          paymenthMethod,
-          items,
-          total,
-          deliveryDate,
-          whenDone,
+          request
         }
       })}
       style={styles.container}
